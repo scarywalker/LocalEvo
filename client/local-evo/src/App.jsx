@@ -6,7 +6,7 @@ import BusinessPage from './routes/BusinessPage';
 
 const App = ()=> {
   return (
-    <div className="App">
+    <div className="container">
       <Router>
         <Routes>
         <Route exact path="/" element={<HomePage/>}/>
