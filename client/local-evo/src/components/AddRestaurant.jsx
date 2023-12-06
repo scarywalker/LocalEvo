@@ -1,18 +1,22 @@
-import React from 'react'
+import React from "react";
 
 function AddRestaurant() {
   return (
-    <div className='mb-4'>
+    <div className="mb-4">
       <form action="">
         <div className="form-row">
           <div className="col">
-            <input type="text" className='form-control' placeholder='name'/>
+            <input type="text" className="form-control" placeholder="name" />
           </div>
           <div className="col">
-          <input type="text" className='form-control' placeholder='location'/>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="location"
+            />
           </div>
           <div className="col">
-            <select name="" id="" className='custom-select my-1 mr-sm-2'>
+            <select name="" id="" className="custom-select my-1 mr-sm-2">
               <option disabled>Price Range</option>
               <option value="1">$</option>
               <option value="2">$$</option>
@@ -25,7 +29,7 @@ function AddRestaurant() {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default AddRestaurant
+export default AddRestaurant;
