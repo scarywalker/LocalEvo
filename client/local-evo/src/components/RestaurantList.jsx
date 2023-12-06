@@ -10,7 +10,6 @@ function RestaurantList(props) {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get("/");
-        console.log(response);
         setRestaurants(response.data.data.restaurant);
       } catch (error) {
         console.error("Error fetching data:", error);
