@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import UserFinder from "../apis/UserFinder";
+import { Link } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 const Register = () => {
@@ -24,8 +25,8 @@ const Register = () => {
         password,
         email,
       });
-      localStorage.setItem("token",response.data.data.token)
-      setIsAuthenticated(true)
+      localStorage.setItem("token", response.data.data.token);
+      setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +62,7 @@ const Register = () => {
         />
         <button className="btn btn-success btn-block">Submit</button>
       </form>
+      <Link to="/login">login</Link>
     </>
   );
 };

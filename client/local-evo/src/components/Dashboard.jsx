@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <>
       <button onClick={() => setIsAuthenticated(!isAuthenticated)}>
-        Dashboard
+        Logout
       </button>
     </>
   );

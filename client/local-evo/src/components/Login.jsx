@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import UserFinder from "../apis/UserFinder";
+import { Link } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
     name: "",
   });
 
-  const { email, name, password } = inputs;
+  const { email, password } = inputs;
 
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -52,6 +53,7 @@ const Login = () => {
         />
         <button className="btn btn-success btn-block">Login</button>
       </form>
+      <Link to="/register">register</Link>
     </>
   );
 };
