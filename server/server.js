@@ -6,10 +6,16 @@ const db = require("./db");
 
 const port = process.env.PORT || 3002;
 
+// middlewere
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+// routes
+
+app.use("/auth", require("./routes/jwtAuth"));
 
 app.get("/api/v1/restaurants", async (req, res) => {
   try {
