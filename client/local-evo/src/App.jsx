@@ -12,6 +12,7 @@ import DashboardPage from "./routes/DashboardPage";
 import LoginPage from "./routes/LoginPage";
 import RegisterPage from "./routes/RegisterPage";
 import { RestaurantContext } from "./context/RestaurantContext";
+
 const App = () => {
   const { isAuthenticated } = useContext(RestaurantContext);
 
