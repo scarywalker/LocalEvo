@@ -17,6 +17,8 @@ app.use(morgan("dev"));
 
 app.use("/auth", require("./routes/jwtAuth"));
 
+app.use("/dashboard", require("./routes/dashboard"));
+
 app.get("/api/v1/restaurants", async (req, res) => {
   try {
     const results = await db.query(
