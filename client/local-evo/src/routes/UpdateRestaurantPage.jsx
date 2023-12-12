@@ -4,7 +4,7 @@ import UpdateRestaurant from "../components/UpdateRestaurant";
 function UpdateRestaurantPage() {
   return (
     <div>
-      <h1 className="text-center">update</h1>
+      <h1 className="text-center">Update</h1>
       <UpdateRestaurant />
     </div>
   );
