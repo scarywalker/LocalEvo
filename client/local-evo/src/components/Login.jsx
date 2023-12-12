@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { RestaurantContext } from "../context/RestaurantContext";
 
 const Login = () => {
-  return (
-    <>Login</>
-  )
-}
+  const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
 
-export default Login
+  return (
+    <>
+      <button onClick={() => setIsAuthenticated(!isAuthenticated)}>
+        Login
+      </button>
+    </>
+  );
+};
+
+export default Login;
