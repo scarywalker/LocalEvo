@@ -20,7 +20,7 @@ const Login = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await UserFinder.post(`/login`, {
+      const response = await UserFinder.post(`/auth/login`, {
         password,
         email,
       });

@@ -20,7 +20,7 @@ const Register = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await UserFinder.post(`/register`, {
+      const response = await UserFinder.post(`/auth/register`, {
         name,
         password,
         email,

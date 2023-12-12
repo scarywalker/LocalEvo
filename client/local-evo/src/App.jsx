@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,9 +12,26 @@ import DashboardPage from "./routes/DashboardPage";
 import LoginPage from "./routes/LoginPage";
 import RegisterPage from "./routes/RegisterPage";
 import { RestaurantContext } from "./context/RestaurantContext";
+import UserFinder from "./apis/UserFinder";
+
 
 const App = () => {
-  const { isAuthenticated } = useContext(RestaurantContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
+
+  const isAuth = async () => {
+    try {
+      const response = await UserFinder.get("/auth/is-verify", {
+        headers: { token: localStorage.token },
+      });
+      setIsAuthenticated(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    isAuth();
+  }, []);
 
   return (
     <div className="container">
