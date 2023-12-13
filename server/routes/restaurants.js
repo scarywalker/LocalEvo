@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// get all restaurants with avarage rating and view count of user
+// get all restaurants of user with avarage rating and view count
 
 router.get("/user/:id", async (req, res) => {
   try {
