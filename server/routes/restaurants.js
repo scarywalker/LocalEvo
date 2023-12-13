@@ -18,6 +18,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get all restaurants with avarage rating and view count of user
+
+router.get("/user/:id", async (req, res) => {
+  try {
+    const results = await db.query(
+      "SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.user_id = $1;",[req.params.id]
+    );
+    res.status(200).json({
+      status: "success",
+      results: results.rows.length,
+      data: { restaurant: results.rows },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // get a restaurant with avarage rating, view count and all reviews for it
 
 router.get("/:id", async (req, res) => {

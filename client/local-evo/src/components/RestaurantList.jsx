@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 function RestaurantList(props) {
   const { restaurants, setRestaurants } = useContext(RestaurantContext);
   let navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await RestaurantFinder.get("/");
+        const response = await RestaurantFinder.get(`/user/${userId}`);
         setRestaurants(response.data.data.restaurant);
       } catch (error) {
         console.error("Error fetching data:", error);

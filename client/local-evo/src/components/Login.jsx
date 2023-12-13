@@ -24,8 +24,8 @@ const Login = () => {
         email,
       });
       localStorage.setItem("token", response.data.data.token);
-      localStorage.setItem("user_id", response.data.data.user_id);
-      localStorage.setItem("user_name", response.data.data.user_name);
+      localStorage.setItem("userId", response.data.data.user_id);
+      localStorage.setItem("userName", response.data.data.user_name);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);

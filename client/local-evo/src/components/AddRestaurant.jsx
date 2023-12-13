@@ -3,17 +3,18 @@ import RestaurantFinder from "../apis/RestaurantFinder";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 function AddRestaurant() {
-  const { addRestaurants, userInfo } = useContext(RestaurantContext);
+  const { addRestaurants } = useContext(RestaurantContext);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("Price Range");
   const [type, setType] = useState("");
+  const userId = localStorage.getItem("userId");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await RestaurantFinder.post("/", {
-        id: userInfo.user_id,
+        id: userId,
         name,
         location,
         type,

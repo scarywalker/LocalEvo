@@ -40,7 +40,7 @@ function UpdateRestaurant() {
 
   return (
     <div>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -71,7 +71,7 @@ function UpdateRestaurant() {
             type="number"
           />
         </div>
-        <button onClick={(e) => handleSubmit(e)} className="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>

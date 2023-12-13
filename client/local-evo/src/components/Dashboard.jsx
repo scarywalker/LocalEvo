@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserFinder from "../apis/UserFinder";
 import { RestaurantContext } from "../context/RestaurantContext";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { setIsAuthenticated } = useContext(RestaurantContext);
@@ -21,12 +22,14 @@ const Dashboard = () => {
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
     setIsAuthenticated(false);
   };
 
   useEffect(() => {
     getName();
-  },[]);
+  }, []);
 
   return (
     <>
@@ -34,6 +37,7 @@ const Dashboard = () => {
       <button className="btn btn-danger" onClick={(e) => logout(e)}>
         Logout
       </button>
+      <Link to="/">home</Link>
     </>
   );
 };
