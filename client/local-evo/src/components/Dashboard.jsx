@@ -33,11 +33,12 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1>Dashboard {name}</h1>
+      <h1>Dashboard of {name}</h1>
       <button className="btn btn-danger" onClick={(e) => logout(e)}>
         Logout
       </button>
-      <Link to="/">home</Link>
+        {" "}
+        <Link  className="btn btn-primary" to="/">My Restaurants</Link>
     </>
   );
 };
