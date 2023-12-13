@@ -95,9 +95,11 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// delete restaurant
+
 router.delete("/:id", async (req, res) => {
   try {
-    const results = await db.query("DELETE FROM restaurants WHERE id = $1;", [
+    const results = await db.query("DELETE FROM restaurants WHERE restaurant_id = $1;", [
       req.params.id,
     ]);
     res.status(204).json({
@@ -109,11 +111,15 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// routes bellow are for reviews
+
+// add review
+
 router.post("/:id/add-review", async (req, res) => {
   try {
     const newReview = await db.query(
-      "INSERT INTO reviews (restaurant_id, name, review, rating) values ($1,$2,$3,$4) returning *",
-      [req.params.id, req.body.name, req.body.review, req.body.rating]
+      "INSERT INTO reviews (restaurant_id, user_id, review_text, rating) values ($1,$2,$3,$4) returning *",
+      [req.params.id, req.body.userId, req.body.review, req.body.rating]
     );
     res.status(201).json({
       status: "success",
