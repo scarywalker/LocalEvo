@@ -9,14 +9,16 @@ function UpdateRestaurant() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
+  const [cosineType, setCosineType] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get(`/${id}`);
-        setName(response.data.data.restaurant.name);
+        setName(response.data.data.restaurant.restaurant_name);
         setLocation(response.data.data.restaurant.location);
         setPriceRange(response.data.data.restaurant.price_range);
+        setCosineType(response.data.data.restaurant.cosine_type);
       } catch (error) {
         console.log(error);
       }
@@ -30,6 +32,7 @@ function UpdateRestaurant() {
       const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
         name,
         location,
+        type: cosineType,
         price_range: priceRange,
       });
       navigate("/");
@@ -57,6 +60,16 @@ function UpdateRestaurant() {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             id="location"
+            className="form-control"
+            type="text"
+          />
+        </div>{" "}
+        <div className="form-group">
+          <label htmlFor="cosine">Cosine Type</label>
+          <input
+            value={cosineType}
+            onChange={(e) => setCosineType(e.target.value)}
+            id="cosine"
             className="form-control"
             type="text"
           />

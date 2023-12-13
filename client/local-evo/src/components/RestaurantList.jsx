@@ -59,6 +59,7 @@ function RestaurantList(props) {
           <tr className="bg-primary">
             <th scope="col">Restaurant</th>
             <th scope="col">Locations</th>
+            <th scope="col">Cuzine</th>
             <th scope="col">Price Range</th>
             <th scope="col">Ratings</th>
             <th scope="col">Edit</th>
@@ -75,6 +76,7 @@ function RestaurantList(props) {
                 >
                   <td>{restaurant.restaurant_name}</td>
                   <td>{restaurant.location}</td>
+                  <td>{restaurant.cosine_type}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
                   <td>{renderRating(restaurant)}</td>
                   <td>

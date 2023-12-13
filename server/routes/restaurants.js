@@ -79,11 +79,13 @@ router.post("/", async (req, res) => {
   }
 });
 
+// update restaurant in db
+
 router.put("/:id", async (req, res) => {
   try {
     const results = await db.query(
-      "UPDATE restaurants SET name = $1, location = $2, price_range = $3 where id = $4 returning *",
-      [req.body.name, req.body.location, req.body.price_range, req.params.id]
+      "UPDATE restaurants SET restaurant_name = $1, location = $2, cosine_type = $3,price_range = $4 where restaurant_id = $5 returning *",
+      [req.body.name, req.body.location,req.body.type, req.body.price_range, req.params.id]
     );
     res.status(200).json({
       status: "success",
