@@ -30,7 +30,7 @@ function RestaurantList(props) {
     e.stopPropagation();
     try {
       const response = RestaurantFinder.delete(`/${id}`);
-      setRestaurants(restaurants.filter((restaurant) => restaurant.id !== id));
+      setRestaurants(restaurants.filter((restaurant) => restaurant.restaurant_id !== id));
     } catch (error) {}
   };
 
@@ -39,13 +39,14 @@ function RestaurantList(props) {
   };
 
   const renderRating = (restaurant) => {
-    if (!restaurant.count) {
+    console.log(restaurant)
+    if (!restaurant.review_count) {
       return <span className="text-warning">0 reviews</span>;
     } else {
       return (
         <>
           <StarRating rating={restaurant.id} />
-          <span className="text-warning ml-1">({restaurant.count})</span>
+          <span className="text-warning ml-1">({restaurant.review_count})</span>
         </>
       );
     }
@@ -69,8 +70,8 @@ function RestaurantList(props) {
             restaurants.map((restaurant) => {
               return (
                 <tr
-                  onClick={() => handleRestaurantSelect(restaurant.id)}
-                  key={restaurant.id}
+                  onClick={() => handleRestaurantSelect(restaurant.restaurant_id)}
+                  key={restaurant.restaurant_id}
                 >
                   <td>{restaurant.restaurant_name}</td>
                   <td>{restaurant.location}</td>
@@ -78,7 +79,7 @@ function RestaurantList(props) {
                   <td>{renderRating(restaurant)}</td>
                   <td>
                     <button
-                      onClick={(e) => handleUpdate(e, restaurant.id)}
+                      onClick={(e) => handleUpdate(e, restaurant.restaurant_id)}
                       className="btn btn-warning"
                     >
                       Update
@@ -86,7 +87,7 @@ function RestaurantList(props) {
                   </td>
                   <td>
                     <button
-                      onClick={(e) => handleDelete(e, restaurant.id)}
+                      onClick={(e) => handleDelete(e, restaurant.restaurant_id)}
                       className="btn btn-danger"
                     >
                       Delete

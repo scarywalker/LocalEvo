@@ -26,7 +26,7 @@ function Business({ id }) {
       {selectedRestaurant && (
         <>
           <h1 className="text-center display-1">
-            {selectedRestaurant.restaurant.name}
+            {selectedRestaurant.restaurant.restaurant_name}
           </h1>
           <div className="text-center">
             <StarRating rating={selectedRestaurant.restaurant.average_rating} />
