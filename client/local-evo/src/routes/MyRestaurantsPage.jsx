@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import AddRestaurant from "../components/AddRestaurant";
 import RestaurantList from "../components/RestaurantList";
 
-function HomePage() {
+function MyRestaurantsPage() {
   return (
     <div>
       <Header />
@@ -13,4 +13,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default MyRestaurantsPage;

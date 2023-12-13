@@ -5,7 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import HomePage from "./routes/HomePage";
+import MyRestaurantsPage from "./routes/MyRestaurantsPage";
 import UpdateRestaurantPage from "./routes/UpdateRestaurantPage";
 import BusinessPage from "./routes/BusinessPage";
 import DashboardPage from "./routes/DashboardPage";
@@ -37,7 +37,7 @@ const App = () => {
     <div className="container">
       <Router>
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/restaurants" element={<MyRestaurantsPage />} />
           <Route exact path="/restaurants/:id" element={<BusinessPage />} />
           <Route
             exact
@@ -48,7 +48,7 @@ const App = () => {
             exact
             path="/login"
             element={
-              !isAuthenticated ? <LoginPage /> : <Navigate to="/dashboard" />
+              !isAuthenticated ? <LoginPage /> : <Navigate to="/" />
             }
           />
           <Route
@@ -60,7 +60,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/dashboard"
+            path="/"
             element={
               isAuthenticated ? <DashboardPage /> : <Navigate to="/login" />
             }
