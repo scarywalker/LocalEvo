@@ -6,6 +6,7 @@ export const RestaurantContextProvider = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedResturant] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userInfo, setUserInfo] = useState({ user_name: "", user_id: "" });
 
   const addRestaurants = (restaurant) => {
     setRestaurants([...restaurants, restaurant]);
@@ -20,6 +21,8 @@ export const RestaurantContextProvider = (props) => {
         setSelectedResturant,
         isAuthenticated,
         setIsAuthenticated,
+        userInfo,
+        setUserInfo,
       }}
     >
       {props.children}

@@ -3,17 +3,20 @@ import RestaurantFinder from "../apis/RestaurantFinder";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 function AddRestaurant() {
-  const { addRestaurants } = useContext(RestaurantContext);
+  const { addRestaurants, userInfo } = useContext(RestaurantContext);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("Price Range");
+  const [type, setType] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await RestaurantFinder.post("/", {
+        id: userInfo.user_id,
         name,
         location,
+        type,
         price_range: priceRange,
       });
       addRestaurants(response.data.data.restaurant);
@@ -42,6 +45,15 @@ function AddRestaurant() {
               type="text"
               className="form-control"
               placeholder="location"
+            />
+          </div>
+          <div className="col">
+            <input
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              type="text"
+              className="form-control"
+              placeholder="cusine"
             />
           </div>
           <div className="col">

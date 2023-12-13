@@ -65,7 +65,7 @@ router.post("/login", validInfo, async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      data: { token },
+      data: { token, user_id: user.rows[0].user_id, user_name: user.rows[0].user_name },
     });
   } catch (error) {
     console.log(error);

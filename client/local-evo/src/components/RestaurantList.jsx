@@ -39,7 +39,6 @@ function RestaurantList(props) {
   };
 
   const renderRating = (restaurant) => {
-    console.log(restaurant)
     if (!restaurant.review_count) {
       return <span className="text-warning">0 reviews</span>;
     } else {

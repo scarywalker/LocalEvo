@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 const Login = () => {
-  const { setIsAuthenticated } = useContext(RestaurantContext);
+  const { setIsAuthenticated, setUserInfo, userInfo } = useContext(RestaurantContext);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
-    name: "",
   });
 
   const { email, password } = inputs;
@@ -26,6 +25,11 @@ const Login = () => {
       });
       localStorage.setItem("token", response.data.data.token);
       setIsAuthenticated(true);
+      setUserInfo({...userInfo,
+        user_id: response.data.data.user_id,
+        user_name: response.data.data.user_name,
+      });
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
