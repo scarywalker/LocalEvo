@@ -72,7 +72,7 @@ function RestaurantList(props) {
                   onClick={() => handleRestaurantSelect(restaurant.id)}
                   key={restaurant.id}
                 >
-                  <td>{restaurant.name}</td>
+                  <td>{restaurant.restaurant_name}</td>
                   <td>{restaurant.location}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
                   <td>{renderRating(restaurant)}</td>

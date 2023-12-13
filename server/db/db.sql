@@ -8,22 +8,25 @@ INSERT INTO reviews (restaurant_id, name, review, rating) values (5, 'btqr', 'de
 INSERT INTO users (user_name, user_email, user_password) values ( 'Henry', 'henry@email.com', 'passwordhenry');
 
 CREATE TABLE restaurants (
-id BIGSERIAL NOT NULL PRIMARY KEY,
-name VARCHAR(50) NOT NULL,
-location VARCHAR(50) NOT NULL,
-price_range int NOT NULL check(price_range >= 1 and price_range <= 5));
+    restaurant_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id uuid REFERENCES users(user_id) NOT NULL,
+    restaurant_name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    cosine_type VARCHAR(255) NOT NULL,
+    price_range INTEGER CHECK (price_range BETWEEN 1 AND 5) NOT NULL
+);
+
 
 CREATE TABLE reviews (
-id BIGSERIAL NOT NULL PRIMARY KEY,
-restaurant_id BIGINT NOT NULL REFERENCES restaurants(id),
-name VARCHAR(50) NOT NULL,
-review TEXT NOT NULL,
-rating INT NOT NULL check(rating >= 1 and rating <= 5));
+    review_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id uuid REFERENCES users(user_id) NOT NULL,
+    restaurant_id uuid REFERENCES restaurants(restaurant_id) NOT NULL,
+    review_text TEXT NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5) NOT NULL
+);
 
 
-SELECT * FROM restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id where id = 4;
 
-create extension if not exists "uuid-ossp";
 
 CREATE TABLE users (
 user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -31,3 +34,7 @@ user_name VARCHAR(255) NOT NULL,
 user_email VARCHAR(255) NOT NULL,
 user_password VARCHAR(255) NOT NULL);
 
+
+SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id;
+
+create extension if not exists "uuid-ossp";
