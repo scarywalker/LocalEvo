@@ -38,13 +38,37 @@ const App = () => {
     <div className="container">
       <Router>
         <Routes>
-          <Route exact path="/restaurants" element={<MyRestaurantsPage />} />
-          <Route exact path="/restaurants/:id" element={<BusinessPage />} />
-          <Route exect path="/search" element={<SearchPage />} />
+          <Route
+            exact
+            path="/restaurants"
+            element={
+              isAuthenticated ? <MyRestaurantsPage /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            exact
+            path="/restaurants/:id"
+            element={
+              isAuthenticated ? <BusinessPage /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            exact
+            path="/search"
+            element={
+              isAuthenticated ? <SearchPage /> : <Navigate to="/login" />
+            }
+          />
           <Route
             exact
             path="/restaurants/:id/update"
-            element={<UpdateRestaurantPage />}
+            element={
+              isAuthenticated ? (
+                <UpdateRestaurantPage />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact
@@ -66,7 +90,7 @@ const App = () => {
             }
           />
         </Routes>
-      </Router>      
+      </Router>
       <Footer />
     </div>
   );
