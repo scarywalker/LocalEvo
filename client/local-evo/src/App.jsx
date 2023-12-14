@@ -13,7 +13,8 @@ import LoginPage from "./routes/LoginPage";
 import RegisterPage from "./routes/RegisterPage";
 import { RestaurantContext } from "./context/RestaurantContext";
 import UserFinder from "./apis/UserFinder";
-
+import SearchPage from "./routes/SearchPage";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
@@ -39,6 +40,7 @@ const App = () => {
         <Routes>
           <Route exact path="/restaurants" element={<MyRestaurantsPage />} />
           <Route exact path="/restaurants/:id" element={<BusinessPage />} />
+          <Route exect path="/search" element={<SearchPage />} />
           <Route
             exact
             path="/restaurants/:id/update"
@@ -47,9 +49,7 @@ const App = () => {
           <Route
             exact
             path="/login"
-            element={
-              !isAuthenticated ? <LoginPage /> : <Navigate to="/" />
-            }
+            element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />}
           />
           <Route
             exact
@@ -67,6 +67,7 @@ const App = () => {
           />
         </Routes>
       </Router>
+      <Footer />
     </div>
   );
 };

@@ -38,7 +38,9 @@ const Dashboard = () => {
         Logout
       </button>
         {" "}
-        <Link  className="btn btn-primary" to="/">My Restaurants</Link>
+        <Link  className="btn btn-primary m-2" to="/">My Restaurants</Link>
+        <Link  className="btn btn-secondary m-2" to="/Search">Search Restaurants</Link>
+        <div><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores officiis repellendus repudiandae saepe adipisci eveniet ut at fugiat error sed debitis esse, magnam asperiores odit nisi autem perspiciatis laboriosam. Accusamus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dicta consequatur recusandae quia soluta sunt illum minus, cumque explicabo provident corrupti vitae laudantium mollitia doloremque! Suscipit possimus nostrum similique porro.</p></div>
     </>
   );
 };

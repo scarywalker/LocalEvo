@@ -56,6 +56,26 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// search restaurants by name, location, or cosine
+
+router.get("/search/:query", async (req, res) => {
+  try {
+    const queryString = `%${req.params.query}%`;
+    const results = await db.query(
+      "SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.restaurant_name ILIKE $1 OR restaurants.location ILIKE $1 OR restaurants.cosine_type ILIKE $1;",
+      [queryString]
+    );
+    res.status(200).json({
+      status: "success",
+      results: results.rows.length,
+      data: { restaurants: results.rows },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "Internal Server Error" });
+  }
+});
+
 // add a new restaurant to the database.
 
 router.post("/", async (req, res) => {
