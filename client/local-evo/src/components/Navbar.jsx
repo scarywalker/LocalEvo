@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { RestaurantContext } from "../context/RestaurantContext";
 
 const Navbar = () => {
+  const { setIsAuthenticated } = useContext(RestaurantContext);
+
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    setIsAuthenticated(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
@@ -31,6 +42,9 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+        <button className="btn btn-danger" onClick={(e) => logout(e)}>
+          Logout
+        </button>
       </div>
     </nav>
   );
