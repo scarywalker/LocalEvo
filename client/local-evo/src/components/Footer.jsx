@@ -7,10 +7,10 @@ const Footer = () => {
             <div className="text-center">
               <p className="mb-0">
                 Connect with me on:
-                <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer" className="ml-2 text-light">
+                <a href="https://github.com/scarywalker/" target="_blank" rel="noopener noreferrer" className="ml-2 text-light">
                   <i className="fab fa-github fa-lg"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank" rel="noopener noreferrer" className="ml-2 text-light">
+                <a href="https://www.linkedin.com/in/gabriel-dischon-5013b4152/" target="_blank" rel="noopener noreferrer" className="ml-2 text-light">
                   <i className="fab fa-linkedin fa-lg"></i>
                 </a>
               </p>
