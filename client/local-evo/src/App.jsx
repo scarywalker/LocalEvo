@@ -89,6 +89,7 @@ const App = () => {
               isAuthenticated ? <DashboardPage /> : <Navigate to="/login" />
             }
           />
+          <Route path="*" element={<Navigate to={"/login"} />} />
         </Routes>
       </Router>
       <Footer />
