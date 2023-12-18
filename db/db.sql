@@ -1,9 +1,3 @@
-DROP TABLE restaurants;
-
-SELECT * FROM restaurants;
-SELECT * FROM reviews;
-SELECT * FROM users;
-
 create extension if not exists "uuid-ossp";
 
 CREATE TABLE users (
@@ -33,6 +27,6 @@ CREATE TABLE reviews (
 
 
 
-SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id;
+-- SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id;
 
-SELECT reviews.*, users.user_name FROM reviews INNER JOIN users ON reviews.user_id = users.user_id WHERE reviews.restaurant_id = $1;
+-- SELECT reviews.*, users.user_name FROM reviews INNER JOIN users ON reviews.user_id = users.user_id WHERE reviews.restaurant_id = $1;
