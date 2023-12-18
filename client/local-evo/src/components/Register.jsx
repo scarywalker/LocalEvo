@@ -26,6 +26,8 @@ const Register = () => {
         email,
       });
       localStorage.setItem("token", response.data.data.token);
+      localStorage.setItem("userId", response.data.data.user_id);
+      localStorage.setItem("userName", response.data.data.user_name);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);

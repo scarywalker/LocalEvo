@@ -9,6 +9,10 @@ const Seacrh = () => {
   const [query, setQuery] = useState("");
   let navigate = useNavigate();
 
+  useEffect(() => {
+    setRestaurants([]);
+  }, []);
+
   const onSubmitSearch = async (e) => {
     e.preventDefault();
     try {

@@ -35,7 +35,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="mb-5 mx-4">
       <Router>
         <Routes>
           <Route

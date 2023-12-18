@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserFinder from "../apis/UserFinder";
 const Dashboard = () => {
-
   const [name, setName] = useState("");
 
   const getName = async () => {
@@ -20,10 +19,20 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <>
+    <div className="jumbutron">
       <h1>Dashboard of {name}</h1>
-        <div><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores officiis repellendus repudiandae saepe adipisci eveniet ut at fugiat error sed debitis esse, magnam asperiores odit nisi autem perspiciatis laboriosam. Accusamus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dicta consequatur recusandae quia soluta sunt illum minus, cumque explicabo provident corrupti vitae laudantium mollitia doloremque! Suscipit possimus nostrum similique porro.</p></div>
-    </>
+      <div>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores
+          officiis repellendus repudiandae saepe adipisci eveniet ut at fugiat
+          error sed debitis esse, magnam asperiores odit nisi autem perspiciatis
+          laboriosam. Accusamus. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Hic dicta consequatur recusandae quia soluta sunt
+          illum minus, cumque explicabo provident corrupti vitae laudantium
+          mollitia doloremque! Suscipit possimus nostrum similique porro.
+        </p>
+      </div>
+    </div>
   );
 };
 

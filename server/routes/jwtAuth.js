@@ -32,7 +32,7 @@ router.post("/register", validInfo, async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      data: { token },
+      data: { token, user_id: newUser.rows[0].user_id, user_name: newUser.rows[0].user_name },
     });
   } catch (error) {
     console.log(error);

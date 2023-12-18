@@ -9,5 +9,5 @@ root.render(
     <RestaurantContextProvider>
       <App />
     </RestaurantContextProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

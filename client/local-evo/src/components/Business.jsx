@@ -37,7 +37,7 @@ function Business({ id }) {
           </div>
           <div className="mt-3">
             <Reviews reviews={selectedRestaurant.reviews} />
-            <AddReview /> 
+            <AddReview />
           </div>
         </>
       )}

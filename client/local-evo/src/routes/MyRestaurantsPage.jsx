@@ -2,12 +2,12 @@ import React from "react";
 import Header from "../components/Header";
 import AddRestaurant from "../components/AddRestaurant";
 import RestaurantList from "../components/RestaurantList";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 function MyRestaurantsPage() {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Header />
       <AddRestaurant />
       <RestaurantList />

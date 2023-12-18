@@ -4,8 +4,13 @@ SELECT * FROM restaurants;
 SELECT * FROM reviews;
 SELECT * FROM users;
 
-INSERT INTO reviews (restaurant_id, name, review, rating) values (5, 'btqr', 'dee3er', 3);
-INSERT INTO users (user_name, user_email, user_password) values ( 'Henry', 'henry@email.com', 'passwordhenry');
+create extension if not exists "uuid-ossp";
+
+CREATE TABLE users (
+user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+user_name VARCHAR(255) NOT NULL,
+user_email VARCHAR(255) NOT NULL,
+user_password VARCHAR(255) NOT NULL);
 
 CREATE TABLE restaurants (
     restaurant_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -15,7 +20,6 @@ CREATE TABLE restaurants (
     cosine_type VARCHAR(255) NOT NULL,
     price_range INTEGER CHECK (price_range BETWEEN 1 AND 5) NOT NULL
 );
-
 
 CREATE TABLE reviews (
     review_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -28,15 +32,7 @@ CREATE TABLE reviews (
 
 
 
-CREATE TABLE users (
-user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-user_name VARCHAR(255) NOT NULL,
-user_email VARCHAR(255) NOT NULL,
-user_password VARCHAR(255) NOT NULL);
-
 
 SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id;
 
 SELECT reviews.*, users.user_name FROM reviews INNER JOIN users ON reviews.user_id = users.user_id WHERE reviews.restaurant_id = $1;
-
-create extension if not exists "uuid-ossp";

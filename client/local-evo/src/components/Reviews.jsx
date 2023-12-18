@@ -6,7 +6,8 @@ const Reviews = ({ reviews }) => {
     <div className="row row-cols-3 mb-2">
       {reviews.map((review) => {
         return (
-          <div key={review.id}
+          <div
+            key={review.id}
             className="card text-white bg-primary mb-3 mr-4 text-center"
             style={{ maxWidth: "42%", minWidth: "30%" }}
           >

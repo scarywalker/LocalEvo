@@ -31,7 +31,9 @@ function RestaurantList(props) {
     e.stopPropagation();
     try {
       const response = RestaurantFinder.delete(`/${id}`);
-      setRestaurants(restaurants.filter((restaurant) => restaurant.restaurant_id !== id));
+      setRestaurants(
+        restaurants.filter((restaurant) => restaurant.restaurant_id !== id),
+      );
     } catch (error) {}
   };
 
@@ -71,7 +73,9 @@ function RestaurantList(props) {
             restaurants.map((restaurant) => {
               return (
                 <tr
-                  onClick={() => handleRestaurantSelect(restaurant.restaurant_id)}
+                  onClick={() =>
+                    handleRestaurantSelect(restaurant.restaurant_id)
+                  }
                   key={restaurant.restaurant_id}
                 >
                   <td>{restaurant.restaurant_name}</td>
