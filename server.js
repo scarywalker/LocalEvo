@@ -1,17 +1,20 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const db = require("./db");
-
-const port = process.env.PORT || 3002;
+const app = express();
+const path = require("path");
+const PORT = process.env.PORT || 3002;
 
 // middlewere
 
-const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/local-evo/build")));
+}
 
 // routes
 
@@ -21,4 +24,4 @@ app.use("/api/v1/dashboard", require("./routes/dashboard"));
 
 app.use("/api/v1/restaurants", require("./routes/restaurants"));
 
-app.listen(port, () => console.log(`server on : ${port}`));
+app.listen(PORT, () => console.log(`server on : ${PORT}`));

@@ -19,7 +19,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="jumbutron">
+    <div className="">
       <h1>Dashboard of {name}</h1>
       <div>
         <p>
