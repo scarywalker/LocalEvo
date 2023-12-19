@@ -10,26 +10,26 @@ const authorization = require("../middleware/authorization");
 router.post("/register", validInfo, async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    console.log(`request register name : ${name}`);
     const user = await db.query("SELECT * FROM users WHERE user_email = $1", [
       email,
     ]);
-
+    console.log(`done db check`);
     if (user.rows.length !== 0)
       return res.status(401).send("User already exists");
 
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
-
+    console.log(" done salting");
     const bcryptPassword = await bcrypt.hash(password, salt);
-
+    console.log("done encryption");
     const newUser = await db.query(
       "INSERT INTO users (user_name, user_email, user_password) values ($1, $2, $3) RETURNING *;",
       [name, email, bcryptPassword]
     );
-
+    console.log("done db op");
     const token = jwtGenerator(newUser.rows[0].user_id);
-
+    console.log("token created");
     res.status(201).json({
       status: "success",
       data: { token, user_id: newUser.rows[0].user_id, user_name: newUser.rows[0].user_name },
