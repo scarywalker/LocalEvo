@@ -32,11 +32,15 @@ router.post("/register", validInfo, async (req, res) => {
     console.log("token created");
     res.status(201).json({
       status: "success",
-      data: { token, user_id: newUser.rows[0].user_id, user_name: newUser.rows[0].user_name },
+      data: {
+        token,
+        user_id: newUser.rows[0].user_id,
+        user_name: newUser.rows[0].user_name,
+      },
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Server Error");
+    res.status(500).send(`Server Error${error}`);
   }
 });
 
@@ -65,11 +69,15 @@ router.post("/login", validInfo, async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      data: { token, user_id: user.rows[0].user_id, user_name: user.rows[0].user_name },
+      data: {
+        token,
+        user_id: user.rows[0].user_id,
+        user_name: user.rows[0].user_name,
+      },
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Server Error");
+    res.status(500).send(`Server Error${error}`);
   }
 });
 
@@ -80,7 +88,7 @@ router.get("/is-verify", authorization, async (req, res) => {
     res.json(true);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Server Error");
+    res.status(500).send(`Server Error${error}`);
   }
 });
 
