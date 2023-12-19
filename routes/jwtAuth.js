@@ -11,7 +11,7 @@ router.post("/register", validInfo, async (req, res) => {
   try {
     const { name, email, password } = req.body;
     console.log(`request register name : ${name}`);
-    const user = await db.query("SELECT * FROM users WHERE user_email = $1", [
+    const user = await db.query("SELECT * FROM users WHERE user_email = $1;", [
       email,
     ]);
     console.log(`done db check`);
@@ -50,7 +50,7 @@ router.post("/login", validInfo, async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await db.query("SELECT * FROM users WHERE user_email = $1", [
+    const user = await db.query("SELECT * FROM users WHERE user_email = $1;", [
       email,
     ]);
 
