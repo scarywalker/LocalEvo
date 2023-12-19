@@ -24,8 +24,8 @@ app.use("/api/v1/dashboard", require("./routes/dashboard"));
 
 app.use("/api/v1/restaurants", require("./routes/restaurants"));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client/local-evo/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/local-evo/build/index.html"));
+});
 
 app.listen(PORT, () => console.log(`server on : ${PORT}`));
