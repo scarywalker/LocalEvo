@@ -40,7 +40,7 @@ router.post("/register", validInfo, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send(`Server Error${error}`);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -77,7 +77,7 @@ router.post("/login", validInfo, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send(`Server Error${error}`);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -88,7 +88,7 @@ router.get("/is-verify", authorization, async (req, res) => {
     res.json(true);
   } catch (error) {
     console.log(error);
-    res.status(500).send(`Server Error${error}`);
+    res.status(500).send("Server Error");
   }
 });
 
