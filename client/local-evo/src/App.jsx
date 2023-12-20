@@ -16,6 +16,7 @@ import UserFinder from "./apis/UserFinder";
 import SearchPage from "./routes/SearchPage";
 import Footer from "./components/Footer";
 import Loading from "./components/Loading";
+import MyReviewsPage from "./routes/MyReviewsPage";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
@@ -39,71 +40,86 @@ const App = () => {
   }, [localStorage.token]);
 
   if (loading) {
-    // Render loading state or spinner while authentication check is in progress
-    return <Loading/>
+    return <Loading />;
   }
 
   return (
     <div className="flex justify-center">
-    <div className="mb-12 mx-0 sm:mx-4 max-w-5xl w-full">
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/restaurants"
-            element={
-              isAuthenticated ? <MyRestaurantsPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            exact
-            path="/restaurants/:id"
-            element={
-              isAuthenticated ? <BusinessPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            exact
-            path="/search"
-            element={
-              isAuthenticated ? <SearchPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            exact
-            path="/restaurants/:id/update"
-            element={
-              isAuthenticated ? (
-                <UpdateRestaurantPage />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/login"
-            element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />}
-          />
-          <Route
-            exact
-            path="/register"
-            element={
-              !isAuthenticated ? <RegisterPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            exact
-            path="/"
-            element={
-              isAuthenticated ? <DashboardPage /> : <Navigate to="/login" />
-            }
-          />
-          <Route path="*" element={<Navigate to={"/login"} />} />
-        </Routes>
-      </Router>
-      <Footer />
-    </div></div>
+      <div className="mb-12 mx-0 sm:mx-4 max-w-5xl w-full">
+        <Router>
+          <Routes>
+            <Route
+              exact
+              path="/restaurants"
+              element={
+                isAuthenticated ? (
+                  <MyRestaurantsPage />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/reviews"
+              element={
+                isAuthenticated ? (
+                  <MyReviewsPage />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/restaurants/:id"
+              element={
+                isAuthenticated ? <BusinessPage /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              exact
+              path="/search"
+              element={
+                isAuthenticated ? <SearchPage /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              exact
+              path="/restaurants/:id/update"
+              element={
+                isAuthenticated ? (
+                  <UpdateRestaurantPage />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/login"
+              element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />}
+            />
+            <Route
+              exact
+              path="/register"
+              element={
+                !isAuthenticated ? <RegisterPage /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              exact
+              path="/"
+              element={
+                isAuthenticated ? <DashboardPage /> : <Navigate to="/login" />
+              }
+            />
+            <Route path="*" element={<Navigate to={"/login"} />} />
+          </Routes>
+        </Router>
+        <Footer />
+      </div>
+    </div>
   );
 };
 

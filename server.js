@@ -24,7 +24,7 @@ app.use("/api/v1/dashboard", require("./routes/dashboard"));
 
 app.use("/api/v1/restaurants", require("./routes/restaurants"));
 
-app.use("/api/v1/reviews", require("./routes/restaurants"));
+app.use("/api/v1/reviews", require("./routes/reviews"));
 
 
 app.get("*", (req, res) => {

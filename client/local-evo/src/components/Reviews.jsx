@@ -3,20 +3,19 @@ import StarRating from "./StarRating";
 
 const Reviews = ({ reviews }) => {
   return (
-    <div className="row row-cols-3 mb-2">
+    <div className="">
       {reviews.map((review) => {
         return (
-          <div
-            key={review.review_id}
-            className="card text-white bg-primary mb-3 mr-4 text-center"
-            style={{ maxWidth: "42%", minWidth: "30%" }}
-          >
-            <div className="card-header d-flex justify-content-between flex-column">
-              <span>{review.user_name}</span>
-              <span>{<StarRating rating={review.rating} />}</span>
-            </div>
-            <div className="car-body">
-              <p className="card-text">{review.review_text}</p>
+          <div className="card bg-base-100 border-2 border-slate-800 rounded-md shadow-md m-8">
+            <div className="card-body">
+              <h2 className="card-title">
+                {review.user_name}{" "}
+                <span>{<StarRating rating={review.rating} />}</span>
+              </h2>
+              <p>{review.review_text}</p>
+              <div className={`card-actions justify-end ${review.user_id !== localStorage.userId && "hidden"}`}>
+                <button className="btn btn-info btn-outline btn-sm">Update Review</button>
+              </div>
             </div>
           </div>
         );

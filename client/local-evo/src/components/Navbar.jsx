@@ -40,7 +40,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="btn btn-sm btn-ghost place-content-center"
-                to="/search"
+                to="/reviews"
               >
                 My reviews
               </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
           <li>
             <Link
               className="btn btn-sm btn-ghost place-content-center"
-              to="/search"
+              to="/reviews"
             >
               My reviews
             </Link>
