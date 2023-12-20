@@ -104,7 +104,7 @@ function RestaurantList(props) {
                       onClick={(e) => handleUpdate(e, restaurant.restaurant_id)}
                       className="btn btn-xs btn-outline btn-warning"
                     >
-                      Update
+                      Edit
                     </button>
                   </td>
                   <td>
@@ -112,7 +112,7 @@ function RestaurantList(props) {
                       onClick={(e) => handleDelete(e, restaurant.restaurant_id)}
                       className="btn btn-xs btn-outline btn-error"
                     >
-                      Delete
+                      X
                     </button>
                   </td>
                 </tr>

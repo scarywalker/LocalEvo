@@ -18,6 +18,7 @@ import Footer from "./components/Footer";
 import Loading from "./components/Loading";
 import MyReviewsPage from "./routes/MyReviewsPage";
 import UpdateReviewPage from "./routes/UpdateReviewPage";
+import UpdateUserPage from "./routes/UpdateUserPage";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
@@ -101,6 +102,13 @@ const App = () => {
                 ) : (
                   <Navigate to="/login" />
                 )
+              }
+            />
+            <Route
+              exact
+              path="/user/:id"
+              element={
+                isAuthenticated ? <UpdateUserPage /> : <Navigate to="/login" />
               }
             />
             <Route

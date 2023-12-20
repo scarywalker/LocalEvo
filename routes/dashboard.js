@@ -21,9 +21,9 @@ router.get("/", authorization, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const results = await db.query(
-      "UPDATE users SET user_name = $1, user_email = $2, where user_id = $3 returning *",
-      [req.body.name, req.body.email, req.params.id]
+    await db.query(
+      "UPDATE users SET user_name = $1 where user_id = $2 returning *",
+      [req.body.name, req.params.id]
     );
     res.status(200).json({
       status: "success",

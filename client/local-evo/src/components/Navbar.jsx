@@ -6,8 +6,7 @@ import ReturnButton from "./ReturnButton";
 const Navbar = () => {
   const { setIsAuthenticated } = useContext(RestaurantContext);
 
-  const logout = (e) => {
-    e.preventDefault();
+  const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");

@@ -44,7 +44,7 @@ function UpdateRestaurant() {
 
   return (
     <div>
-      <h1 className="text-4xl text-center">Update</h1>
+      <h1 className="text-4xl text-center">Update {name}</h1>
       <form className="form-control m-8" onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
