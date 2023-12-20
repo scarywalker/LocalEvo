@@ -11,7 +11,7 @@ const AddReview = () => {
   let navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handlwSubmitReview = async (e) => {
+  const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (rating === "Rating" || !review) {
       alert("Please fill in both the rating and review fields.");
@@ -61,9 +61,9 @@ const AddReview = () => {
         required
       ></textarea>
       <button
-        onClick={handlwSubmitReview}
+        onClick={handleSubmitReview}
         type="submit"
-        className="btn btn-outline btn-sm btn-primary mt-8"
+        className="btn btn-outline btn-sm btn-primary my-6"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Submitting..." : "Submit"}

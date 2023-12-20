@@ -6,7 +6,7 @@ const ReturnButton = () => {
   return (
     <button
       onClick={() => navigate(-1)}
-      className="btn btn-outline btn-sm btn-warning mt-6"
+      className="btn btn-outline btn-sm btn-warning"
     >
       Return
     </button>

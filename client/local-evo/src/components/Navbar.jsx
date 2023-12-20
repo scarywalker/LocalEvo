@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext";
+import ReturnButton from "./ReturnButton";
 
 const Navbar = () => {
   const { setIsAuthenticated } = useContext(RestaurantContext);
@@ -95,9 +96,12 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+
       <div className="navbar-end">
+        <ReturnButton />
+
         <button
-          className="btn btn-sm btn-outline btn-error"
+          className="btn btn-sm btn-outline btn-error ml-1"
           onClick={(e) => logout(e)}
         >
           Logout

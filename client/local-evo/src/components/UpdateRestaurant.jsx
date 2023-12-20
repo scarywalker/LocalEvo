@@ -84,7 +84,7 @@ function UpdateRestaurant() {
         </select>
         <button
           type="submit"
-          className="btn btn-outline btn-sm btn-primary mt-6"
+          className="btn btn-outline btn-sm btn-primary my-6"
         >
           Submit
         </button>

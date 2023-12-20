@@ -29,7 +29,9 @@ function RestaurantList(props) {
     e.stopPropagation();
     try {
       navigate(`/restaurants/${id}/update`);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDelete = async (e, id) => {
@@ -39,7 +41,9 @@ function RestaurantList(props) {
       setRestaurants(
         restaurants.filter((restaurant) => restaurant.restaurant_id !== id)
       );
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleRestaurantSelect = (id) => {
