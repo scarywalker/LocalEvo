@@ -35,7 +35,7 @@ function UpdateRestaurant() {
         type: cosineType,
         price_range: priceRange,
       });
-      navigate("/");
+      navigate("/restaurants");
     } catch (error) {
       console.log(error);
     }
@@ -76,13 +76,17 @@ function UpdateRestaurant() {
         </div>
         <div className="form-group">
           <label htmlFor="price_range">Price Range</label>
-          <input
-            value={priceRange}
-            onChange={(e) => setPriceRange(e.target.value)}
-            id="price_range"
-            className="form-control"
-            type="number"
-          />
+          <select
+              value={priceRange}
+              onChange={(e) => setPriceRange(e.target.value)}
+              className="custom-select my-1 mr-sm-2"
+            >
+              <option value="1">$</option>
+              <option value="2">$$</option>
+              <option value="3">$$$</option>
+              <option value="4">$$$$</option>
+              <option value="5">$$$$$</option>
+            </select>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit

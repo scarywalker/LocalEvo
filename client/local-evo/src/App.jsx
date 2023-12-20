@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,6 +18,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
+  const [loading, setLoading] = useState(true);
 
   const isAuth = async () => {
     try {
@@ -27,12 +28,19 @@ const App = () => {
       setIsAuthenticated(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     isAuth();
   }, []);
+
+  if (loading) {
+    // Render loading state or spinner while authentication check is in progress
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="mb-5 mx-4">
