@@ -15,6 +15,7 @@ import { RestaurantContext } from "./context/RestaurantContext";
 import UserFinder from "./apis/UserFinder";
 import SearchPage from "./routes/SearchPage";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(RestaurantContext);
@@ -35,15 +36,15 @@ const App = () => {
 
   useEffect(() => {
     isAuth();
-  }, []);
+  }, [localStorage.token]);
 
   if (loading) {
     // Render loading state or spinner while authentication check is in progress
-    return <div>Loading...</div>;
+    return <Loading/>
   }
 
   return (
-    <div className="mb-5 mx-4">
+    <div className="mb-0 mx-0 sm:mx-4">
       <Router>
         <Routes>
           <Route

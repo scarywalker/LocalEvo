@@ -3,10 +3,13 @@ import RestaurantFinder from "../apis/RestaurantFinder";
 import StarRating from "./StarRating";
 import { RestaurantContext } from "../context/RestaurantContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Seacrh = () => {
   const { restaurants, setRestaurants } = useContext(RestaurantContext);
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -15,13 +18,14 @@ const Seacrh = () => {
 
   const onSubmitSearch = async (e) => {
     e.preventDefault();
+    setSubmitted(true);
     try {
       const response = await RestaurantFinder.get(`/search/${query}`);
       setRestaurants(response.data.data.restaurants);
-      console.log(response);
-      console.log(restaurants);
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,54 +49,63 @@ const Seacrh = () => {
   return (
     <>
       <div className="container text-center">
-        <h1 className="my-5">Search</h1>
+        <h1 className="my-5 text-4xl">Search</h1>
         <form className="d-flex my-4">
           <input
             type="text"
             name="query"
             placeholder="Enter search . . ."
-            className="form-control"
+            className="input input-bordered input-sm mb-2  mx-4"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           <button
             onClick={(e) => onSubmitSearch(e)}
             type="submit"
-            className="btn btn-success"
+            className="btn btn-outline btn-sm btn-success"
           >
             Search
           </button>
         </form>
       </div>
-      <div className="list-group">
-        <table className="table table-hover table-dark ">
+      <div className="">
+        <table className="table table-xs md:table-sm">
           <thead>
-            <tr className="bg-primary">
-              <th scope="col">Restaurant</th>
+            <tr className="text-center">
+              <th scope="col">Name</th>
               <th scope="col">Locations</th>
               <th scope="col">Cuzine</th>
-              <th scope="col">Price Range</th>
+              <th scope="col">Price</th>
               <th scope="col">Ratings</th>
             </tr>
           </thead>
           <tbody>
-            {restaurants &&
+            {loading && submitted ? (
+              <tr>
+                <td>
+                  <Loading />
+                </td>
+              </tr>
+            ) : (
               restaurants.map((restaurant) => {
-                return (
-                  <tr
-                    onClick={() =>
-                      handleRestaurantSelect(restaurant.restaurant_id)
-                    }
-                    key={restaurant.restaurant_id}
-                  >
-                    <td>{restaurant.restaurant_name}</td>
-                    <td>{restaurant.location}</td>
-                    <td>{restaurant.cosine_type}</td>
-                    <td>{"$".repeat(restaurant.price_range)}</td>
-                    <td>{renderRating(restaurant)}</td>
-                  </tr>
-                );
-              })}
+                if (restaurant.user_id !== localStorage.userId)
+                  return (
+                    <tr
+                      className="hover text-center"
+                      onClick={() =>
+                        handleRestaurantSelect(restaurant.restaurant_id)
+                      }
+                      key={restaurant.restaurant_id}
+                    >
+                      <td>{restaurant.restaurant_name}</td>
+                      <td>{restaurant.location}</td>
+                      <td>{restaurant.cosine_type}</td>
+                      <td>{"$".repeat(restaurant.price_range)}</td>
+                      <td>{renderRating(restaurant)}</td>
+                    </tr>
+                  );
+              })
+            )}
           </tbody>
         </table>
       </div>

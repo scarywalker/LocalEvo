@@ -27,41 +27,34 @@ function AddRestaurant() {
   };
 
   return (
-    <div className="mb-4">
+    <div className="m-4">
       <form action="">
-        <div className="form-row">
-          <div className="col">
+        <div className="form-control">
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               type="text"
-              className="form-control"
+              className="input input-bordered input-sm mb-2"
               placeholder="name"
             />
-          </div>
-          <div className="col">
             <input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               type="text"
-              className="form-control"
+              className="input input-bordered input-sm mb-2"
               placeholder="location"
             />
-          </div>
-          <div className="col">
             <input
               value={type}
               onChange={(e) => setType(e.target.value)}
               type="text"
-              className="form-control"
+              className="input input-bordered input-sm mb-2"
               placeholder="cusine"
             />
-          </div>
-          <div className="col">
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
-              className="custom-select my-1 mr-sm-2"
+              className="select select-bordered select-sm mb-2"
             >
               <option disabled>Price Range</option>
               <option value="1">$</option>
@@ -70,11 +63,10 @@ function AddRestaurant() {
               <option value="4">$$$$</option>
               <option value="5">$$$$$</option>
             </select>
-          </div>
           <button
             onClick={handleSubmit}
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-outline btn-success btn-sm"
           >
             Add
           </button>

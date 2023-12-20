@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RestaurantFinder from "../apis/RestaurantFinder";
 import StarRating from "./StarRating";
 import { RestaurantContext } from "../context/RestaurantContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 function RestaurantList(props) {
   const { restaurants, setRestaurants } = useContext(RestaurantContext);
+  const [loading, setLoading] = useState(true);
   let navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,10 +18,12 @@ function RestaurantList(props) {
         setRestaurants(response.data.data.restaurant);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [userId]);
 
   const handleUpdate = async (e, id) => {
     e.stopPropagation();
@@ -30,9 +35,9 @@ function RestaurantList(props) {
   const handleDelete = async (e, id) => {
     e.stopPropagation();
     try {
-      const response = RestaurantFinder.delete(`/${id}`);
+      await RestaurantFinder.delete(`/${id}`);
       setRestaurants(
-        restaurants.filter((restaurant) => restaurant.restaurant_id !== id),
+        restaurants.filter((restaurant) => restaurant.restaurant_id !== id)
       );
     } catch (error) {}
   };
@@ -55,24 +60,31 @@ function RestaurantList(props) {
   };
 
   return (
-    <div className="list-group">
-      <table className="table table-hover table-dark">
+    <div className="">
+      <table className="table table-xs md:table-sm">
         <thead>
-          <tr className="bg-primary">
-            <th scope="col">Restaurant</th>
+          <tr className="text-center">
+            <th scope="col">Name</th>
             <th scope="col">Locations</th>
             <th scope="col">Cuzine</th>
-            <th scope="col">Price Range</th>
+            <th scope="col">Price</th>
             <th scope="col">Ratings</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
-          {restaurants &&
+          {loading ? (
+            <tr>
+              <td>
+                <Loading />
+              </td>
+            </tr>
+          ) : (
             restaurants.map((restaurant) => {
               return (
                 <tr
+                  className="hover text-center"
                   onClick={() =>
                     handleRestaurantSelect(restaurant.restaurant_id)
                   }
@@ -86,7 +98,7 @@ function RestaurantList(props) {
                   <td>
                     <button
                       onClick={(e) => handleUpdate(e, restaurant.restaurant_id)}
-                      className="btn btn-warning"
+                      className="btn btn-xs btn-outline btn-warning"
                     >
                       Update
                     </button>
@@ -94,14 +106,15 @@ function RestaurantList(props) {
                   <td>
                     <button
                       onClick={(e) => handleDelete(e, restaurant.restaurant_id)}
-                      className="btn btn-danger"
+                      className="btn btn-xs btn-outline btn-error"
                     >
                       Delete
                     </button>
                   </td>
                 </tr>
               );
-            })}
+            })
+          )}
         </tbody>
       </table>
     </div>

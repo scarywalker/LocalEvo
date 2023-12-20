@@ -33,29 +33,53 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1 className="text-center my-5">Login</h1>
-      <form onSubmit={onSubmitForm}>
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          className="form-control my-3"
-          value={email}
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          className="form-control my-3"
-          value={password}
-          onChange={(e) => handleChange(e)}
-        />
-        <button className="btn btn-success btn-block">Login</button>
-      </form>
-      <Link to="/register">register</Link>
-    </>
+    <div className="relative flex flex-col justify-center h-screen overflow-hidden">
+      <div className="w-full p-6 m-auto border-2 border-slate-800 rounded-md shadow-md lg:max-w-lg">
+        <h1 className="text-3xl font-semibold text-center text-primary">
+          Login
+        </h1>
+        <form className="space-y-4" onSubmit={onSubmitForm}>
+          <div>
+            <label className="label">
+              <span className="text-base label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="w-full input input-bordered input-primary"
+              name="email"
+              value={email}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label className="label">
+              <span className="text-base label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              className="w-full input input-bordered input-primary"
+              name="password"
+              value={password}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <br />
+          <div>
+            <button type="submit" className="btn btn-outline btn-primary btn-block">
+              Login
+            </button>
+          </div>
+        </form>
+        <Link
+          to="/register"
+          className="mt-2 flex items-center text-sm font-bold text-gray-600 hover:underline hover:text-blue-600"
+        >
+          <i className="fas fa-user-plus mr-1"></i> Register
+        </Link>
+      </div>
+    </div>
   );
 };
 

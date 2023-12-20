@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../components/Header";
 import AddRestaurant from "../components/AddRestaurant";
 import RestaurantList from "../components/RestaurantList";
 import Navbar from "../components/Navbar";
@@ -8,7 +7,7 @@ function MyRestaurantsPage() {
   return (
     <div>
       <Navbar />
-      <Header />
+      <h1 className="text-4xl text-center">Your Restaurants</h1>
       <AddRestaurant />
       <RestaurantList />
     </div>
