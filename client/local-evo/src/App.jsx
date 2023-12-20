@@ -44,7 +44,8 @@ const App = () => {
   }
 
   return (
-    <div className="mb-0 mx-0 sm:mx-4">
+    <div className="flex justify-center">
+    <div className="mb-12 mx-0 sm:mx-4 max-w-5xl w-full">
       <Router>
         <Routes>
           <Route
@@ -102,7 +103,7 @@ const App = () => {
         </Routes>
       </Router>
       <Footer />
-    </div>
+    </div></div>
   );
 };
 

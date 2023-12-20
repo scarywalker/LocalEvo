@@ -13,7 +13,6 @@ function Business({ id }) {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get(`/${id}`);
-        console.log(response);
         setSelectedResturant(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -36,8 +35,8 @@ function Business({ id }) {
             </span>
           </div>
           <div className="mt-3">
+            {selectedRestaurant.restaurant.user_id !== localStorage.userId && <AddReview />}
             <Reviews reviews={selectedRestaurant.reviews} />
-            <AddReview />
           </div>
         </>
       )}

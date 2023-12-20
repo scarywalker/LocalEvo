@@ -6,7 +6,7 @@ const db = require("../db");
 router.get("/", async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id;"
+      "SELECT restaurants.*, reviews.review_count AS review_count, reviews.average_rating AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id;"
     );
     res.status(200).json({
       status: "success",
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 router.get("/user/:id", async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.user_id = $1;",
+      "SELECT restaurants.*, reviews.review_count AS review_count, reviews.average_rating AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.user_id = $1;",
       [req.params.id]
     );
     res.status(200).json({
@@ -41,7 +41,7 @@ router.get("/user/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const restaurant = await db.query(
-      "SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.restaurant_id = $1;",
+      "SELECT restaurants.*,reviews.review_count AS review_count,reviews.average_rating AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.restaurant_id = $1;",
       [req.params.id]
     );
     const reviews = await db.query(
@@ -63,7 +63,7 @@ router.get("/search/:query", async (req, res) => {
   try {
     const queryString = `%${req.params.query}%`;
     const results = await db.query(
-      "SELECT restaurants.*, COALESCE(reviews.review_count, 0) AS review_count, COALESCE(reviews.average_rating, 0) AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.restaurant_name ILIKE $1 OR restaurants.location ILIKE $1 OR restaurants.cosine_type ILIKE $1;",
+      "SELECT restaurants.*, reviews.review_count AS review_count, reviews.average_rating AS average_rating FROM restaurants LEFT JOIN (SELECT restaurant_id, COUNT(*) AS review_count, TRUNC(AVG(rating), 1) AS average_rating FROM reviews GROUP BY restaurant_id) reviews ON restaurants.restaurant_id = reviews.restaurant_id WHERE restaurants.restaurant_name ILIKE $1 OR restaurants.location ILIKE $1 OR restaurants.cosine_type ILIKE $1;",
       [queryString]
     );
     res.status(200).json({
