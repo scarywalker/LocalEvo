@@ -9,6 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [wrongCredentials,setWrongCredentials] = useState(false)
 
   const { email, password } = inputs;
 
@@ -18,6 +19,7 @@ const Login = () => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    setWrongCredentials(false)
     try {
       const response = await UserFinder.post(`/auth/login`, {
         password,
@@ -29,6 +31,7 @@ const Login = () => {
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
+      setWrongCredentials(true)
     }
   };
 
@@ -78,6 +81,7 @@ const Login = () => {
         >
           <i className="fas fa-user-plus mr-1"></i> Register
         </Link>
+        {wrongCredentials && <div className="text-error">invalid email or password</div>}
       </div>
     </div>
   );
